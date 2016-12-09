@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>监控主页</title>
+  <!-- 公共文件-->
+  <script src="../script/lib/jquery/jquery.js" type="text/javascript" language="javascript"></script>
+  <script src="../script/common/sifu.js"></script>
+  <script src="../script/API.js"></script>
+  <!-- 百度地图-->
+  <link href="http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6VArBpbbbMjBVP22TflHkpSq"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.js"></script>
+  <script type="text/javascript" src='../script/module/monitor/map_convertP.js'></script>
+  <!-- 弹出层-->
+  <link rel="stylesheet" href="../script/lib/layer/skin/layer.css" />
+  <script type="text/javascript" src='../script/lib/layer/layer.js'></script>
+  <!-- 百度地图DIY-->
+  <script type="text/javascript" src='../script/module/monitor/map_diyBdMap.js'></script>
+  <script type="text/javascript" src='../script/module/monitor/map_diyTools.js'></script>
+  <script type="text/javascript" src='../script/module/monitor/map_diyOverlay.js'></script>
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+  }
+  
+  body {
+    position: relative;
+  }
+  /*输入框*/
+  #ipt_map {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    width: 300px;
+    margin-left: -150px;
+    height: 36px;
+    border: 2px solid #21536d;
+    z-index: 10;
+  }
+  
+  #ipt_map > input {
+    padding-left: 10px;
+    float: left;
+    height: 100%;
+    width: 230px;
+    border: none;
+  }
+  
+  #ipt_map > span {
+    float: left;
+    height: 100%;
+    width: 60px;
+    line-height: 36px;
+    text-align: center;
+    background-color: white;
+    cursor: pointer;
+    background-color: #21536d;
+    color: white;
+  }
+
+
+  /*追踪框*/
+  #trail_map {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    min-width: 600px;
+    margin-left: -300px;
+    height: 36px;
+    border: 2px solid #21536d;
+    z-index: 11;
+  }
+  #t_info {
+    float: left;
+    height: 100%;
+    min-width: 520px;
+    background-color: white;
+    line-height: 36px;
+    font-size: 12px;
+  }
+  #trail_map > #t_back {
+    float: right;
+    height: 100%;
+    width: 80px;
+    line-height: 36px;
+    text-align: center;
+    background-color: white;
+    cursor: pointer;
+    background-color: #21536d;
+    color: white;
+  }
+
+
+  /*面板信息*/
+  .markLabel {
+    opacity: .80;
+    filter: alpha(opacity=80);
+    position: relative;
+    color: #fff;
+    top: 4px;
+    background-color: #3b4139;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    padding: 5px 20px;
+    min-width: 120px;
+    z-index: 1000
+  }
+  
+  .markLabel .labelName {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+  }
+  
+  .markLabel .labelArrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    bottom: -7px;
+    left: 50px;
+    margin-left: -5px;
+    border-width: 8px 8px 0;
+    border-top-color: #3b4139;
+  }
+  #sos_list {
+    display: inline-block;
+    margin-left: 10px;
+    width: 35px;
+    line-height: 20px;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+  }
+  </style>
+</head>
+
+<body>
+<div style="width: 100%;height: 100%;background-color: red;font-size: 30px">该楼的报警列表</div>
+</body>
+</html>

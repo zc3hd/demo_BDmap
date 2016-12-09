@@ -1,0 +1,74 @@
+html,body{
+    width: 100%;
+    height: 100%;
+}
+.bgImg{
+    width: 100%;
+    height: 100%;
+    position:fixed;
+}
+.loginWrap{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: -130px;
+}
+.loginWrap,.opcityBg,.loginCon{
+    width: 500px;
+    height: 260px;
+    border-radius:15px;
+}
+.opcityBg{
+    opacity: 0.3;
+    background: #fff;
+}
+.loginCon{
+    width: 450px;
+    height: 170px;
+    position: absolute;
+    left: 15px;
+    top:15px;
+    background: #fff;
+    padding:30px 10px;
+}
+.leftPic{
+    width: 200px;
+    height: 150px;
+    margin-top: 20px;
+    float: left;
+}
+.leftPic img{
+    width: 100%;
+}
+.textWrap{
+    height: 150px;
+    margin-left: 210px;
+    padding-top: 10px;
+}
+.textWrap p{
+    font-size: 14px;
+    height: 50px;
+    line-height: 50px;
+}
+.textWrap p input[type=text],.textWrap p input[type=password]{
+    width:160px;
+    height: 28px;
+    border: 1px solid #ccc;
+    text-indent: 4px;
+}
+.subBtn{
+    padding: 4px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 700;
+    border-radius:4px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+.loginBtn{
+    background: #5485c9;
+}
+.resetBtn{
+    background: #de8c12;
+}
