@@ -100,44 +100,9 @@
 ![室内的数据](./webapp/readme_img/010.png) 
 ![室内的数据](./webapp/readme_img/011.png) 
 
-Browsersync works by injecting an asynchronous script tag (`<script async>...</script>`) right after the `<body>` tag
-during initial request. In order for this to work properly the `<body>` tag must be present. Alternatively you
-can provide a custom rule for the snippet using 
-
-## Upgrading from 1.x to 2.x ?
-Providing you haven't accessed any internal properties, everything will just work as
- there are no breaking changes to the public API. Internally however, we now use an
- immutable data structure for storing/retrieving options. So whereas before you could access urls like this...
-
-```js
-browserSync({server: true}, function(err, bs) {
-    console.log(bs.options.urls.local);
-});
-```
-
-... you now access them in the following way:
-
-```js
-browserSync({server: true}, function(err, bs) {
-    console.log(bs.options.getIn(["urls", "local"]));
-});
-```
-
-## Install and trouble shooting
-
-[browsersync.io docs](http://browsersync.io)
-
-## Integrations / recipes
-
-[Browsersync recipes](https://github.com/Browsersync/recipes)
-
-## Support
-
-If you've found Browser-sync useful and would like to contribute to its continued development & support, please feel free to send a donation of any size - it would be greatly appreciated!
-
-[![Support via Gittip](https://rawgithub.com/chris---/Donation-Badges/master/gittip.jpeg)](https://www.gittip.com/shakyshane)
-[![Support via PayPal](https://rawgithub.com/chris---/Donation-Badges/master/paypal.jpeg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=shakyshane%40gmail%2ecom&lc=US&item_name=browser%2dsync)
-
-
-Apache 2
-Copyright (c) 2016 Shane Osbourne
+## 3.思路
+* 第一次实现室内地图切换，在追踪模式室内外地图切换的地方折腾了会，开始的思路有错误，但值得先按先前的思维写代码。
+* 先前的想法：就是室外写室外的追踪，室内写室内的追踪。两个定时器，互不干扰。渲染数据的逻辑也不一样。
+* 需求：就是追踪数据有可能在室内，也有可能是室外的，思路：点击一个marker，先拿到追踪数据，判断该数据为室内外？！，分别进行不同的渲染，共用一个定时器。
+## 4.github
+[![Support via Gittip](https://rawgithub.com/chris---/Donation-Badges/master/gittip.jpeg)](https://github.com/zc3hd/demo_BDmap_in-out_change)
