@@ -104,5 +104,6 @@
 * 第一次实现室内地图切换，在追踪模式室内外地图切换的地方折腾了会，开始的思路有错误，但值得先按先前的思维写代码。
 * 先前的想法：就是室外写室外的追踪，室内写室内的追踪。两个定时器，互不干扰。渲染数据的逻辑也不一样。
 * 需求：就是追踪数据有可能在室内，也有可能是室外的，思路：点击一个marker，先拿到追踪数据，判断该数据为室内外？！，分别进行不同的渲染，共用一个定时器。
-## 4.github
+
+## github
 [![Support via Gittip](https://rawgithub.com/chris---/Donation-Badges/master/gittip.jpeg)](https://github.com/zc3hd/demo_BDmap_in-out_change)
