@@ -10,16 +10,22 @@ var target = path.join(__dirname,'./webapp/html/monitor_main.html');
 var footname = path.resolve(__dirname,'./webapp');
 var basename = path.basename(target);
 
+var ms = null;
+gulp.task('default', () => {
+  ms = broswer.create('My Server');
+  ms.init({
+    notify: false,
+    server: footname,
+    index: './html/monitor_main.html',
+    // index: './main.html',
+    port:1234,
+    // tunnel: "myprivatesitecccccccccccc",
+    logConnections: true
+  });
 
-gulp.task('test',()=>{
-	broswer({
-		notify:false,
-		server:footname,
-		index:basename
-	});
-	gulp.watch('webapp/**/*',['reload']);
+  gulp.watch('webapp/**/*', ['reload']);
 });
 
-gulp.task('reload',()=>{
-	broswer.reload();	
+gulp.task('reload', () => {
+  ms.reload();
 });

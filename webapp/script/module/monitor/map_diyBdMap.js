@@ -113,6 +113,7 @@
           all_data();
 
           function all_data() {
+            me.overlayContain = [];
             me.map_clear_Pointer();
             var arr = [{
               "id": 1,
@@ -141,9 +142,9 @@
               "num": 5,
               "key": 1,
               'cols': [
-                { 'cName': '一层', floorId: 55, src: '../images/u171.jpg' },
-                { 'cName': '二层', floorId: 66, src: '../images/u170.jpg' },
-                { 'cName': '三层', floorId: 77, src: '../images/u169.jpg' },
+                { 'cName': '一层', floorId: 55, src: ['../images/u171_50.jpg', '../images/u171_100.jpg', '../images/u171_200.jpg'] },
+                { 'cName': '二层', floorId: 66, src: ['../images/u170_50.jpg', '../images/u170_100.jpg', '../images/u170_200.jpg'] },
+                { 'cName': '三层', floorId: 77, src: ['../images/u169_50.jpg', '../images/u169_100.jpg', '../images/u169_200.jpg'] },
               ]
             }, {
               "id": 3,
@@ -176,24 +177,28 @@
             var convertData = null,
               pt = null;
             for (var i = 0; i < arr.length; i++) {
-              // 室内的打点
+              // 室外楼的打点
               if (arr[i].key == 1) {
                 me.m_hall(arr[i]);
               }
-              // 室外的打点
+              // 室外人的打点
               else if (arr[i].key == 0) {
                 me.m_man(arr[i]);
               }
               //convertData = me.convertCoord({ 'lng': arr[i].point.lng, 'lat': arr[i].point.lat });
               pt = new BMap.Point(arr[i].point.lng, arr[i].point.lat);
+              // 收集所有的点
               me.overlayContain.push(pt);
             }
+            // 视角最优化
             me.map.setViewport(me.overlayContain);
+            // 定时器开启
             me.all_timer = setTimeout(function() {
               console.log('全部数据');
               all_data();
             }, me.all_update_timer);
           }
+          // 搜索功能开启
           me.m_search();
         },
         // 搜索功能
@@ -225,12 +230,13 @@
 
           });
         },
-        // 室外循环的DOME
+        // 室外楼循环的marker
         m_hall: function(data) {
           var me = this;
           var overlay = new Sifu.module.diyOverlay(data, me);
           me.map.addOverlay(overlay);
         },
+        // 室外人的marker
         m_man: function(data) {
           var marker = me.m_man_make(data);
           me.map.addOverlay(marker);
@@ -253,6 +259,7 @@
           marker.man_id = data.id;
           marker.flag = data.flag;
           marker.setTitle(data.name);
+
           // 没有点击的时候有点击事件
           if (me.man_clicl_key) {
             marker.addEventListener('click', function(e) {
@@ -349,8 +356,9 @@
             $('#in_img').attr('src', data.src);
 
             $('#in_img').unbind().on('load', function() {
-
+              // 楼层table栏隐藏
               $('#in_table_contain').hide();
+              // 室内追踪框
               $('#in_trail_map').show();
               me.in_out_trail_make(data);
             })
@@ -374,8 +382,10 @@
         // 个人--室内追踪生成
         in_out_trail_make: function(data) {
           var me = this;
+          // 清除所有室内的点
           $('.in_img_xinB').remove();
           var src = '';
+          // 人的状态
           if (data.flag == 0) {
             src = '../images/man_out.png';
           } else if (data.flag == 1) {
@@ -440,38 +450,8 @@
 
 
 
-        // m_man_info: function(id) {
-        //   var me = this;
-        //   var out_point = {
-        //     "lng": 116.335452 + 0.001 * (Math.random() > 0.5 ? Math.random() : -Math.random()),
-        //     "lat": 40.004517 + 0.001 * (Math.random() > 0.5 ? Math.random() : -Math.random()),
-        //   };
 
-        //   var data = {
-        //     "id": 5,
-        //     "name": "大奶奶",
-        //     "tel_name": "哇哈哈",
-        //     "tel": "13833333333",
-        //     point: null,
-        //     pos: '食堂哈哈哈阿斯顿和哈市',
-        //     "flag": 2,
-        //     "alarm_info": 'SOS报警',
-        //     // key:0室外 1 室内
-        //     "key": 0,
-        //   };
-        //   if (data.key == 0) {
-        //     me.map_clear_Pointer();
-        //     data.point = out_point;
-        //     var marker = me.m_man_make(data);
-        //     me.map.addOverlay(marker);
-        //     var pt = new BMap.Point(data.point.lng, data.point.lat);
-        //     me.map.setViewport([pt]);
-        //   }
-        // },
-
-
-
-        // 室内地图的退出
+        // 1、室内地图的退出
         in_back: function() {
           var me = this;
           $('#in_back').unbind().on('click', function() {
@@ -482,14 +462,17 @@
             $('#inside').css('zIndex', '999');
             $('#trail_map').hide();
             $('#ipt_map').show();
+            // 图片加载标记为0--未加载
+            $('#in_img').attr('flag', 0);
           });
         },
-
+        // 2、点击室内图标，进行室内监控
         // 初始化table栏
         in_table: function(arr, hallId) {
           var me = this;
-          // 室内框的切换
+          // 返回、table栏显示
           $('#in_table_contain').show();
+          // 室内追踪框隐藏
           $('#in_trail_map').hide();
 
           // 清除地图上的点和停止定时器
@@ -500,13 +483,23 @@
           for (var i = 0; i < arr.length; i++) {
             // { 'cName': '一层', floorId: 11 }
             if (arr[i].cName == '一层') {
-              $('#c_table').append('<span class="in_btn_style active" imgSrc = ' + arr[i].src + '  hallId = ' + hallId + ' floorId =' + arr[i].floorId + '>' + arr[i].cName + '</span>');
-              me.in_img_load(arr[i].src, hallId, arr[i].floorId);
+              $('#c_table').append('<span class="in_btn_style active" imgSrc50 = ' + arr[i].src[0] + ' imgSrc100 = ' + arr[i].src[1] + ' imgSrc200 = ' + arr[i].src[2] + '  hallId = ' + hallId + ' floorId =' + arr[i].floorId + '>' + arr[i].cName + '</span>');
+              // 样式---默认访问100%层
+              $('#in_max_min .in_max_min_span').removeClass('active');
+              $('#mm_100').addClass('active');
+              // 容器比例的改变
+              $('#in_img_contain').width('100%');
+              $('#in_img_contain').height('100%');
+              $('#in_img').css({ 'width': "100%", 'height': "100%" });
 
+              // 图片加载100%那个
+              me.in_img_load(arr[i].src[1], hallId, arr[i].floorId);
+              // 每次加载都是100%;
+              $($('#in_max_min span')[1]).addClass('active');
               // 首次记录下当前的层的table
               me.active_c = $('#c_table .active')
             } else {
-              $('#c_table').append('<span class="in_btn_style" imgSrc = ' + arr[i].src + ' hallId = ' + hallId + ' floorId = ' + arr[i].floorId + '>' + arr[i].cName + '</span>');
+              $('#c_table').append('<span class="in_btn_style" imgSrc50 = ' + arr[i].src[0] + ' imgSrc100 = ' + arr[i].src[1] + ' imgSrc200 = ' + arr[i].src[2] + ' hallId = ' + hallId + ' floorId = ' + arr[i].floorId + '>' + arr[i].cName + '</span>');
             }
           };
           // table栏图片切换
@@ -516,6 +509,7 @@
         in_img_click: function() {
           var me = this;
           $('#c_table').unbind().on('click', '.in_btn_style', function(e) {
+            // 切换层的table栏先清除定时器
             clearTimeout(me.in_all_timer);
             var active = $(e.target).hasClass('active');
             // 再次点击的时候记录下点击的table的对象
@@ -523,7 +517,17 @@
             if (!active) {
               $('#c_table span').removeClass('active');
               $(e.target).addClass('active');
-              var src = $(e.target).attr('imgSrc');
+              // 图片标记为0--未进行比例适应
+              $('#in_img').attr('flag', 0);
+              // 样式---默认访问100%层
+              $('#in_max_min .in_max_min_span').removeClass('active');
+              $('#mm_100').addClass('active');
+              // 容器比例的改变
+              $('#in_img_contain').width('100%');
+              $('#in_img_contain').height('100%');
+              $('#in_img').css({ 'width': "100%", 'height': "100%" });
+
+              var src = $(e.target).attr('imgSrc100');
               var hallId = $(e.target).attr('hallId');
               var floorId = $(e.target).attr('floorId');
               me.in_img_load(src, hallId, floorId);
@@ -533,10 +537,17 @@
         // 加载完图片进行打点
         in_img_load: function(src, hallId, floorId) {
           var me = this;
+          var t = new Date().getTime();
           $('#in_img').attr('src', src);
-          $('#in_img').unbind().on('load', function() {
-            console.log(src, hallId, floorId, '-----------------加载完成室内图');
+          // $('#in_img').css('backgroundImage', 'url(' + src + ')');
 
+          $('#in_img').unbind().on('load', function() {
+            console.log('楼层图片地址---', src, '   楼id---', hallId, '   层id---', floorId, '-----------------加载完成室内图');
+
+            // 比例的适应(第一次加载时进行适应)
+            me.in_bili();
+
+            // 打点。启动循环
             in_all_data(src, hallId, floorId);
 
             function in_all_data(src, hallId, floorId) {
@@ -583,10 +594,14 @@
                 in_all_data(src, hallId, floorId);
               }, me.in_all_update_timer);
             }
-            // 
+            // 点击--信标或人的事件
             me.in_img_pep_click();
+            // 室内地图的放大缩小功能
+            me.in_max_min();
           })
         },
+
+        // --------------------------------------
         // 室内单人数据打点渲染
         in_img_one: function(data) {
           // <div class="in_img_xinB" style="position: absolute; width: 50px;height: 50px; top:50%;left: 50%;background-color: red;"></div>
@@ -598,7 +613,7 @@
           } else if (data.pepole[0].flag == 2) {
             src = '../images/man_alarm.png';
           }
-          // key 区分一个人key=0还是多个人
+          // stats 区分一个人key=0还是多个人
           $('#in_img_contain').append('<img class="in_img_xinB" stats=0 pName="' + data.pepole[0].name + '" pflag="' + data.pepole[0].flag + '" pId="' + data.pepole[0].id + '" style="top:' + data.y + ';left:' + data.x + ';display:block" src="' + src + '" title="' + data.pepole[0].name + '"></img>')
         },
         // 室内多人数据打点渲染
@@ -609,10 +624,10 @@
           for (var i = 0; i < data.pepole.length; i++) {
             datas += JSON.stringify(data.pepole[i]) + '&'
           }
-          // key 区分一个人key=1还是多个人
+          // stats 区分一个人key=1还是多个人
           $('#in_img_contain').append('<div class="in_img_xinB" stats=1 datas=' + datas + ' style="top:' + data.y + ';left:' + data.x + ';background:url(' + src + ') no-repeat;"></div>')
         },
-        // 室内地图点击信标的事件
+        // 室内地图点击--信标或人的事件
         in_img_pep_click: function() {
           var me = this;
           $('#in_img_contain').unbind().on('click', '.in_img_xinB', function(e) {
@@ -639,12 +654,15 @@
 
               // 加载退出事件
               me.m_man_back();
-            } else if (stats == 1) {
+            }
+            // 点击信标
+            else if (stats == 1) {
               arr = $(e.target).attr('datas').slice(0, -1).split('&');
               for (var i = 0; i < arr.length; i++) {
                 datas.push(JSON.parse(arr[i]))
               }
               for (var j = 0; j < datas.length; j++) {
+                // flag 表示他的状态
                 if (datas[j].flag == 0) {
                   color = 'black';
                   status = '离线';
@@ -690,6 +708,96 @@
 
           })
         },
+        // --------------------------------------
+        // 比例的适应
+        in_bili: function() {
+          // 第一次加载时进行比例的适应
+          if ($('#in_img').attr('flag') == '0') {
+            var img_bl = $('#in_img').height() / $('#in_img').width();
+            var win_bl = $('#inside').height() / $('#inside').width();
+            console.log(img_bl, win_bl);
+            if (img_bl < win_bl) {
+              $('#in_img').css('width', $('#in_img_contain').width() + 'px');
+              $('#in_img_contain').css('height', $('#in_img').height() + 'px');
+            } else {
+              // $('#div').css('height', '100%');
+              $('#in_img').css('height', $('#in_img_contain').height() + 'px');
+              $('#in_img_contain').css('width', $('#in_img').width() + 'px');
+            }
+            // 设置标记证明第一次加载完成
+            $('#in_img').attr('flag', 1);
+          } else {
+            var id = $('#in_max_min .active').attr('id');
+            if (id == 'mm_50') {
+              // $('#in_img_contain').css({'width':'50%','height':'50%'});
+              $('#in_img_contain').width('50%');
+              $('#in_img_contain').height('50%');
+
+            } else if (id == 'mm_100') {
+              // $('#in_img_contain').css({'width':'100%','height':'100%'});
+              $('#in_img_contain').width('100%');
+              $('#in_img_contain').height('100%');
+            } else if (id == 'mm_200') {
+              // $('#in_img_contain').css({'width':'200%','height':'200%'});
+              $('#in_img_contain').width('200%');
+              $('#in_img_contain').height('200%');
+            }
+            $('#in_img').css({ 'width': "100%", 'height': "100%" });
+          }
+        },
+        // 室内地图的放大缩小功能
+        in_max_min: function() {
+          console.log(454545);
+          /* body... */
+          $('#in_max_min').unbind().on('click', '.in_max_min_span', function(e) {
+            // 切换比例图先清除定时器
+            clearTimeout(me.in_all_timer);
+            /* body... */
+            var active = $(e.target).hasClass('active');
+            if (!active) {
+              $('#in_max_min .in_max_min_span').removeClass('active');
+              $(e.target).addClass('active');
+              var src = $(me.active_c).attr('imgsrc100');
+              var hallId = $(me.active_c).attr('hallId');
+              var floorId = $(me.active_c).attr('floorId');
+              me.in_img_load(src, hallId, floorId);
+            }
+
+          });
+        },
+
+
+
+        // m_man_info: function(id) {
+        //   var me = this;
+        //   var out_point = {
+        //     "lng": 116.335452 + 0.001 * (Math.random() > 0.5 ? Math.random() : -Math.random()),
+        //     "lat": 40.004517 + 0.001 * (Math.random() > 0.5 ? Math.random() : -Math.random()),
+        //   };
+
+        //   var data = {
+        //     "id": 5,
+        //     "name": "大奶奶",
+        //     "tel_name": "哇哈哈",
+        //     "tel": "13833333333",
+        //     point: null,
+        //     pos: '食堂哈哈哈阿斯顿和哈市',
+        //     "flag": 2,
+        //     "alarm_info": 'SOS报警',
+        //     // key:0室外 1 室内
+        //     "key": 0,
+        //   };
+        //   if (data.key == 0) {
+        //     me.map_clear_Pointer();
+        //     data.point = out_point;
+        //     var marker = me.m_man_make(data);
+        //     me.map.addOverlay(marker);
+        //     var pt = new BMap.Point(data.point.lng, data.point.lat);
+        //     me.map.setViewport([pt]);
+        //   }
+        // },
+
+
         // // 个人室内追踪
         // in_img_one_trail: function(id) {
         //   var me = this;

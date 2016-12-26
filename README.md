@@ -1,15 +1,12 @@
 
-## 运行
-
+## 1.运行
 * git pull 下来后，先下载包;
-
 * 运行 gulp test;
-
 * 在端口号后输入 /html/
 
 -----------------------------------------------
 
-## 项目说明
+## 2.项目说明
 
 * 此项目实行了室内追踪模式的前端。使用的是百度API，和layer的弹窗
 * 室外监控：箭头处的小人和页面上的黑色半透明框（地图上楼宇）为实时数据。
@@ -93,51 +90,53 @@
 ![室外人的追踪](./webapp/readme_img/007.png)
 * 室内监控：点击室外楼宇信息下排的数据进入
 ![室内的追踪](./webapp/readme_img/008.png)
-* 进入页面后先进行室内地图加载，加载完成后再进行室内打点，室内打点为 top 和 left，室内点为实时
-![室内的数据](./webapp/readme_img/009.png)
+* 进入页面后先进行室内地图加载，加载完成后再进行室内打点，室内打点为 top 和 left，室内点为实时。室内地图有三个缩放级别。默认为100%级别；
+![室内的数据](./webapp/readme_img/012.png)
+* 点击不同的级别进行不同级别的显示。实质为一个图片。控制其显示比例。只有第一次及（100%）的时间进行比例适应。切换级别不进行比例适应；
+![室内的数据](./webapp/readme_img/013.png)
 * 从室内点击个人，进入追踪模式，实时数据为室内或室外，退出追踪模式时，界面为当前进入的室内监控界面。
 * 点击多人图标弹出多人信息列表，列表信息为人名和当前状态。点击人的名字进入追踪模式
 ![室内的数据](./webapp/readme_img/010.png) 
 ![室内的数据](./webapp/readme_img/011.png) 
 
-Browsersync works by injecting an asynchronous script tag (`<script async>...</script>`) right after the `<body>` tag
-during initial request. In order for this to work properly the `<body>` tag must be present. Alternatively you
-can provide a custom rule for the snippet using 
-
-## Upgrading from 1.x to 2.x ?
-Providing you haven't accessed any internal properties, everything will just work as
- there are no breaking changes to the public API. Internally however, we now use an
- immutable data structure for storing/retrieving options. So whereas before you could access urls like this...
-
-```js
-browserSync({server: true}, function(err, bs) {
-    console.log(bs.options.urls.local);
-});
+## 3.思路
+* 第一次实现室内地图切换，在追踪模式室内外地图切换的地方折腾了会，开始的思路有错误，但值得先按先前的思维写代码。
+* 先前的想法：就是室外写室外的追踪，室内写室内的追踪。两个定时器，互不干扰。渲染数据的逻辑也不一样。
+* 需求：就是追踪数据有可能在室内，也有可能是室外的，思路：点击一个marker，先拿到追踪数据，判断该数据为室内外？！，分别进行不同的渲染，共用一个定时器。
+* 同一层地图不同显示级别的切换：默认进行100%那个设置的加载图片，加载完毕进行比例适应：
 ```
-
-... you now access them in the following way:
-
-```js
-browserSync({server: true}, function(err, bs) {
-    console.log(bs.options.getIn(["urls", "local"]));
-});
+var img_bl = $('#in_img').height() / $('#in_img').width();
+var win_bl = $('#inside').height() / $('#inside').width();
+console.log(img_bl, win_bl);
+if (img_bl < win_bl) {
+  $('#in_img').css('width', $('#in_img_contain').width() + 'px');
+  $('#in_img_contain').css('height', $('#in_img').height() + 'px');
+} else {
+  // $('#div').css('height', '100%');
+  $('#in_img').css('height', $('#in_img_contain').height() + 'px');
+  $('#in_img_contain').css('width', $('#in_img').width() + 'px');
+}
 ```
+* 切换其他级别的图，因为比例适应完成，所有直接根据点击的级别按钮的id值，进行设置宽高：
+```
+            var id = $('#in_max_min .active').attr('id');
+            if (id == 'mm_50') {
+              // $('#in_img_contain').css({'width':'50%','height':'50%'});
+              $('#in_img_contain').width('50%');
+              $('#in_img_contain').height('50%');
 
-## Install and trouble shooting
+            } else if (id == 'mm_100') {
+              // $('#in_img_contain').css({'width':'100%','height':'100%'});
+              $('#in_img_contain').width('100%');
+              $('#in_img_contain').height('100%');
+            } else if (id == 'mm_200') {
+              // $('#in_img_contain').css({'width':'200%','height':'200%'});
+              $('#in_img_contain').width('200%');
+              $('#in_img_contain').height('200%');
+            }
+            $('#in_img').css({ 'width': "100%", 'height': "100%" });
+```
+## 4.github
+[![Support via Gittip](https://rawgithub.com/chris---/Donation-Badges/master/gittip.jpeg)](https://github.com/zc3hd/demo_BDmap_in-out_change)
 
-[browsersync.io docs](http://browsersync.io)
 
-## Integrations / recipes
-
-[Browsersync recipes](https://github.com/Browsersync/recipes)
-
-## Support
-
-If you've found Browser-sync useful and would like to contribute to its continued development & support, please feel free to send a donation of any size - it would be greatly appreciated!
-
-[![Support via Gittip](https://rawgithub.com/chris---/Donation-Badges/master/gittip.jpeg)](https://www.gittip.com/shakyshane)
-[![Support via PayPal](https://rawgithub.com/chris---/Donation-Badges/master/paypal.jpeg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=shakyshane%40gmail%2ecom&lc=US&item_name=browser%2dsync)
-
-
-Apache 2
-Copyright (c) 2016 Shane Osbourne
