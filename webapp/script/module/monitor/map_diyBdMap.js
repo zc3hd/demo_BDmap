@@ -326,8 +326,8 @@
             "flag": 2,
             "alarm_info": 'SOS报警',
             // key:0室外 1 室内
-            // "key": (1000 * Math.random()) > 500 ? 0 : 1,
-            "key": 1,
+            "key": (1000 * Math.random()) > 500 ? 0 : 1,
+            // "key": 1,
             //"key": 1,
             'src': '../images/u170_100.jpg',
           };
