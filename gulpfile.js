@@ -8,7 +8,7 @@ const path = require('path');
 const broswer = require('browser-sync');
 var target = path.join(__dirname,'./webapp/html/monitor_main.html');
 var footname = path.resolve(__dirname,'./webapp');
-var basename = path.basename(target);
+
 
 var ms = null;
 gulp.task('default', () => {

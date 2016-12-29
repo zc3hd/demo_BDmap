@@ -326,9 +326,10 @@
             "flag": 2,
             "alarm_info": 'SOS报警',
             // key:0室外 1 室内
-            "key": (1000 * Math.random()) > 500 ? 0 : 1,
+            // "key": (1000 * Math.random()) > 500 ? 0 : 1,
+            "key": 1,
             //"key": 1,
-            'src': '../images/u170.jpg',
+            'src': '../images/u170_100.jpg',
           };
 
 
@@ -353,13 +354,31 @@
             // 提高室内图的层级
             $('#inside').css('zIndex', '1001');
             data.point = in_point;
-            $('#in_img').attr('src', data.src);
+            var t = new Date().getTime();
+            $('#in_img').attr('src', data.src + '?t=' + t);
 
             $('#in_img').unbind().on('load', function() {
               // 楼层table栏隐藏
               $('#in_table_contain').hide();
+              $('#in_max_min').hide();
+
               // 室内追踪框
               $('#in_trail_map').show();
+
+              // 进行比例适应
+              !function bili(argument) {
+                var img_bl = $('#in_img').height() / $('#in_img').width();
+                var win_bl = $('#inside').height() / $('#inside').width();
+                console.log(img_bl, win_bl);
+                if (img_bl < win_bl) {
+                  $('#in_img').css('width', $('#in_img_contain').width() + 'px');
+                  $('#in_img_contain').css('height', $('#in_img').height() + 'px');
+                } else {
+                  // $('#div').css('height', '100%');
+                  $('#in_img').css('height', $('#in_img_contain').height() + 'px');
+                  $('#in_img_contain').css('width', $('#in_img').width() + 'px');
+                }
+              }();
               me.in_out_trail_make(data);
             })
           }
@@ -472,6 +491,8 @@
           var me = this;
           // 返回、table栏显示
           $('#in_table_contain').show();
+          $('#in_max_min').show();
+          
           // 室内追踪框隐藏
           $('#in_trail_map').hide();
 
