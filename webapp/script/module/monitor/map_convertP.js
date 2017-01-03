@@ -1,10 +1,4 @@
-/**
- * Item Name  : 
- *Creator         :zhang hongchang
- *Email            :hc.zhang@chinalbs.org
- *Created Date:
- *@pararm     :
- */
+
 //坐标转换
 /**
  * Created with JetBrains WebStorm.
