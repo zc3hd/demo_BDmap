@@ -136,5 +136,5 @@ if (img_bl < win_bl) {
             }
             $('#in_img').css({ 'width': "100%", 'height': "100%" });
 ```
-## 4.github
+## 4.MIT
 [![Support via Gittip](https://rawgithub.com/chris---/Donation-Badges/master/gittip.jpeg)](https://github.com/zc3hd/demo_BDmap_in-out_change)
