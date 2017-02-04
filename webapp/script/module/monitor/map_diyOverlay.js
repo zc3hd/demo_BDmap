@@ -1,7 +1,7 @@
 /**
  * Item Name  :
- *Creator         :cc
- *Email            :cc
+ *Creator         :zhang hongchang
+ *Email            :hc.zhang@chinalbs.org
  *Created Date:2016.12.6
  *@pararm     :
  */

@@ -1,7 +1,7 @@
-# 【一】BdMap_in_out_change 百度地图监控追踪-室内外无缝切换
+
 ## 1.运行
 * git pull 下来后，先下载包;
-* 运行 gulp test;
+* 运行 gulp;
 * 在端口号后输入 /html/
 
 -----------------------------------------------
@@ -117,7 +117,7 @@ if (img_bl < win_bl) {
   $('#in_img_contain').css('width', $('#in_img').width() + 'px');
 }
 ```
-* 切换其他级别的图，因为比例适应完成，所有直接根据点击的级别按钮的id值，进行设置宽高：
+* 切换其他级别的图，因为比例适应完成，所有直接根据点击的级别按钮的id值，进行设置宽高
 ```
             var id = $('#in_max_min .active').attr('id');
             if (id == 'mm_50') {
@@ -136,5 +136,7 @@ if (img_bl < win_bl) {
             }
             $('#in_img').css({ 'width': "100%", 'height': "100%" });
 ```
+##### 特别注意：室内定时器的渲染和室内地图的级别的选择变换丝毫没有影响！！！定时器的渲染数据属于业务逻辑范畴，定时器每次拿到数据，根据父级的显示进行室内点的渲染，而层级的选择就是属于样式的改变了，不属于业务逻辑上的，只是进行样式的改变，不需要进行打断定时器，重启定时器。
 ## 4.MIT
-[![Support via Gittip](https://rawgithub.com/chris---/Donation-Badges/master/gittip.jpeg)](https://github.com/zc3hd/demo_BDmap_in-out_change)
+
+

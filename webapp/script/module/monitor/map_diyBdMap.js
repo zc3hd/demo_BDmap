@@ -1,7 +1,7 @@
 /**
  * Item Name  :
- *Creator         :cc
- *Email            :cc
+ *Creator         :zhang hongchang
+ *Email            :hc.zhang@chinalbs.org
  *Created Date:2016.12.6
  *@pararm     :
  */
@@ -336,6 +336,7 @@
           // 先进行室内外判断
           // 室外
           if (data.key == 0) {
+            // 室内层级的降低
             $('#inside').css('zIndex', '999');
 
             //框的切换 
@@ -538,7 +539,7 @@
             if (!active) {
               $('#c_table span').removeClass('active');
               $(e.target).addClass('active');
-              // 图片标记为0--未进行比例适应
+              // 图片标记为0--未进行比例适应（比例适应后，50 100 200就不用进行比例适应了。直接设置百分比即可）
               $('#in_img').attr('flag', 0);
               // 样式---默认访问100%层
               $('#in_max_min .in_max_min_span').removeClass('active');
@@ -1383,7 +1384,6 @@
           me.manage_ajaxCarsData();
         }, 2000);
       });
-
     },
     //所有的数据进行打点--最佳视角
     manage_darwCarsData: function(data) {

@@ -9,7 +9,7 @@ const broswer = require('browser-sync');
 var target = path.join(__dirname,'./webapp/html/monitor_main.html');
 var footname = path.resolve(__dirname,'./webapp');
 
-
+// 实时监控的测试
 var ms = null;
 gulp.task('default', () => {
   ms = broswer.create('My Server');
@@ -28,4 +28,26 @@ gulp.task('default', () => {
 
 gulp.task('reload', () => {
   ms.reload();
+});
+
+
+// 围栏设置的测试
+var ms_Fence = null;
+gulp.task('wl', () => {
+  ms_Fence = broswer.create('My Server');
+  ms_Fence.init({
+    notify: false,
+    server: footname,
+    index: './html/monitor_fence_set.html',
+    // index: './main.html',
+    port:1235,
+    // tunnel: "myprivatesitecccccccccccc",
+    logConnections: true
+  });
+
+  gulp.watch('webapp/**/*', ['reload_Fence']);
+});
+
+gulp.task('reload_Fence', () => {
+  ms_Fence.reload();
 });

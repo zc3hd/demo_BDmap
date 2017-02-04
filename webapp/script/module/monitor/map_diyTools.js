@@ -1,7 +1,7 @@
 /**
  * Item Name  : 
- *Creator         :cc
- *Email            :cc
+ *Creator         :zhang hongchang
+ *Email            :hc.zhang@chinalbs.org
  *Created Date:2016.12.6
  *@pararm     :
  */
@@ -28,8 +28,9 @@
         div.style.border = '2px solid #21536d';
         div.style.position = 'absolute';
         div.style.backgroundColor = 'white';
-
-        if(me.mode){  //用于其他按钮时
+        
+        //用于其他按钮时
+        if(me.mode){  
             div.id = 'btnsContianer';
 
             for(var i=0;i<me.otherBtns.length;i++){

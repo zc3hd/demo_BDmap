@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>围栏设置</title>
+  <!-- 公共文件-->
+  <script src="../script/lib/jquery/jquery.js" type="text/javascript" language="javascript"></script>
+  <script src="../script/common/sifu.js"></script>
+  <!-- <script src="../script/API.js"></script> -->
+  <!-- 百度地图-->
+  <link href="http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6VArBpbbbMjBVP22TflHkpSq"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.js"></script>
+  <!-- 绘画工具 -->
+  <link href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+  <!-- 坐标转换 -->
+  <script type="text/javascript" src='../script/module/monitor/map_convertP.js'></script>
+  <!-- 弹出层-->
+  <link rel="stylesheet" href="../script/lib/layer/skin/layer.css" />
+  <script type="text/javascript" src='../script/lib/layer/layer.js'></script>
+  <!-- 百度地图DIY-->
+  <script type="text/javascript" src='../script/module/monitor/map_diyTools.js'></script>
+  <script type="text/javascript" src='../script/module/monitor/map_diyOverlay.js'></script>
+  <script type="text/javascript" src='../script/module/monitor/map_diyFence_set.js'></script>
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+  }
+  /*弹窗添加围栏的每一行*/
+  .f_p {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .f_p .f_p_one {
+    display: inline-block;
+    width: 100px;
+  }
+  body {
+    /*position: relative;*/
+  }
+  </style>
+</head>
+
+<body>
+  <!-- 室外地图 -->
+  <div id="map_main" style="width:100%;height:100%;">
+    <div style="width:100%;height:100%;" id="container"></div>
+  </div>
+</body>
+<script>
+$(function() {
+  new Sifu.module.FenceSet({
+    id: 'container',
+    point: {
+      "lng": 116.338452,
+      "lat": 40.006517,
+    }
+  }).init();
+});
+</script>
+
+</html>
