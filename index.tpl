@@ -126,7 +126,11 @@ padding-left: 220px;
 
 img {
 	/*position: relative;*/
+<<<<<<< HEAD
 	width: 800px;
+=======
+
+>>>>>>> c4f6b881da65a1037b6a7492a3312c02a5a23ffd
 	border-width: 5px;
 	border-style: solid;
 	border-color: Orange;
@@ -142,11 +146,16 @@ h3,h4{
 /*	width: 500px;*/
 	color: white;
 	font-size: 22px;
+<<<<<<< HEAD
 	padding-left: 10px;
+=======
+	padding-left: 20px;
+>>>>>>> c4f6b881da65a1037b6a7492a3312c02a5a23ffd
 }
 h4{
 	width: 50%;
 	font-size: 18px;
+<<<<<<< HEAD
 	margin-left: 5px;
 }
 pre {
@@ -157,6 +166,11 @@ pre code {
 	font-size: 16px;
 	font-weight: 500;
 }
+=======
+	margin-left: 10px;
+}
+
+>>>>>>> c4f6b881da65a1037b6a7492a3312c02a5a23ffd
 /*---------------------------------------------------------底部*/
 footer {
 padding-top: 10px;

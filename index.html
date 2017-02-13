@@ -126,7 +126,11 @@ padding-left: 220px;
 
 img {
 	/*position: relative;*/
+<<<<<<< HEAD
 	width: 800px;
+=======
+
+>>>>>>> c4f6b881da65a1037b6a7492a3312c02a5a23ffd
 	border-width: 5px;
 	border-style: solid;
 	border-color: Orange;
@@ -142,11 +146,16 @@ h3,h4{
 /*	width: 500px;*/
 	color: white;
 	font-size: 22px;
+<<<<<<< HEAD
 	padding-left: 10px;
+=======
+	padding-left: 20px;
+>>>>>>> c4f6b881da65a1037b6a7492a3312c02a5a23ffd
 }
 h4{
 	width: 50%;
 	font-size: 18px;
+<<<<<<< HEAD
 	margin-left: 5px;
 }
 pre {
@@ -157,6 +166,11 @@ pre code {
 	font-size: 16px;
 	font-weight: 500;
 }
+=======
+	margin-left: 10px;
+}
+
+>>>>>>> c4f6b881da65a1037b6a7492a3312c02a5a23ffd
 /*---------------------------------------------------------底部*/
 footer {
 padding-top: 10px;
@@ -176,7 +190,11 @@ footer h3 {
 
 <nav>
 <ul>
+<<<<<<< HEAD
 <li class="level3"><a href="#0.1">1.运行</a></li><li class="level3"><a href="#0.2">2.项目说明：</a></li><li class="level4"><a href="#0.2.1">2.1室外监控：</a></li><li class="level4"><a href="#0.2.2">2.2室外人的监控：</a></li><li class="level4"><a href="#0.2.3">2.3室外楼宇的监控：</a></li><li class="level4"><a href="#0.2.4">2.4追踪模式：</a></li><li class="level4"><a href="#0.2.5">2.5退出追踪：</a></li><li class="level4"><a href="#0.2.6">2.6搜索模式：</a></li><li class="level4"><a href="#0.2.7">2.7室内监控：</a></li><li class="level3"><a href="#0.3">3.思路</a></li><li class="level3"><a href="#0.4">4.MIT by cc</a></li><li class="level3"><a href="#0.5">开源协议</a></li></ul>
+=======
+<li class="level2"><a href="#1">1.运行</a></li><li class="level2"><a href="#2">2.项目说明</a></li><li class="level2"><a href="#3">3.思路</a></li><li class="level2"><a href="#4">4.MIT</a></li><li class="level3"><a href="#4.1">开源协议</a></li></ul>
+>>>>>>> c4f6b881da65a1037b6a7492a3312c02a5a23ffd
 
 </nav>
 
@@ -186,12 +204,17 @@ footer h3 {
 </header>
 
 <article>
+<<<<<<< HEAD
 <h3 id="0.1">1.运行</h3>
+=======
+<h2 id="1">1.运行</h2>
+>>>>>>> c4f6b881da65a1037b6a7492a3312c02a5a23ffd
 <ul>
 <li>git pull 下来后，先下载包;</li>
 <li>运行 gulp;</li>
 <li>在端口号后输入 /html/</li>
 </ul>
+<<<<<<< HEAD
 <h3 id="0.2">2.项目说明：</h3>
 <ul>
 <li>此项目实行了室内追踪模式的前端。使用的是百度API，和layer的弹窗</li>
@@ -298,6 +321,100 @@ footer h3 {
 <h4 id="0.2.7">2.7室内监控：</h4>
 <ul>
 <li>点击室外楼宇信息下排的数据进入</li>
+=======
+<hr>
+<h2 id="2">2.项目说明</h2>
+<ul>
+<li>此项目实行了室内追踪模式的前端。使用的是百度API，和layer的弹窗</li>
+<li>室外监控：箭头处的小人和页面上的黑色半透明框（地图上楼宇）为实时数据。</li>
+<li>室外人的监控：根据人的状态数据不同来展示不同状态图片，位置实时更新。
+<img src="./webapp/readme_img/001.png" alt="室外人的监控"></li>
+<li>室外楼宇的监控：半透明框上排的数据为报警数据，下排数据为楼内的人的数量
+<img src="./webapp/readme_img/002.png" alt="室外楼宇的监控"></li>
+<li>右上角为自定义的工具栏      <a href="https://github.com/zc3hd/demo_BDmap_in-out_change/blob/master/webapp/script/module/monitor/map_diyTools.js">自定义百度工具栏</a>
+<img src="./webapp/readme_img/003.png" alt="室外楼宇的监控"></li>
+<li><p>点击室外人的marker进入追踪模式，因为数据为实时的，所以人有可能会在室内或室外，室内外地图进行切换，代码部分为层级的切换。</p>
+<ul>
+<li><p>室内追踪</p>
+<p><img src="./webapp/readme_img/004.png" alt="室内人的追踪"></p>
+</li>
+<li><p>室外追踪</p>
+<p><img src="./webapp/readme_img/005.png" alt="室外人的追踪"></p>
+</li>
+<li><p>代码部分</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>function(id){
+        var me = this;
+          // 数据为模拟数据
+          var out_point = {
+            &quot;lng&quot;: 116.335452 + 0.001 * (Math.random() &gt; 0.5 ? Math.random() : -Math.random()),
+            &quot;lat&quot;: 40.004517 + 0.001 * (Math.random() &gt; 0.5 ? Math.random() : -Math.random()),
+          };
+          var in_point = {
+            &quot;x&quot;: 56 + 10 * (Math.random() &gt; 0.5 ? Math.random() : -Math.random()) + &#39;%&#39;,
+            &quot;y&quot;: 23 + 10 * (Math.random() &gt; 0.5 ? Math.random() : -Math.random()) + &#39;%&#39;,
+          };
+          var data = {
+            &quot;id&quot;: 5,
+            &quot;name&quot;: &quot;大奶奶&quot;,
+            &quot;tel_name&quot;: &quot;哇哈哈&quot;,
+            &quot;tel&quot;: &quot;13833333333&quot;,
+            point: null,
+            pos: &#39;食堂哈哈哈阿斯顿和哈市&#39;,
+            &quot;flag&quot;: 2,
+            &quot;alarm_info&quot;: &#39;SOS报警&#39;,
+            // key:0室外 1 室内
+            &quot;key&quot;: (1000 * Math.random()) &gt; 500 ? 0 : 1,
+            //&quot;key&quot;: 1,
+            &#39;src&#39;: &#39;../images/u170.jpg&#39;,
+          };
+
+
+          // 先进行室内外判断
+          // 室外
+          if (data.key == 0) {
+            $(&#39;#inside&#39;).css(&#39;zIndex&#39;, &#39;999&#39;);
+
+            //框的切换 
+            $(&#39;#ipt_map&#39;).hide();
+            $(&#39;#trail_map&#39;).show();
+
+            me.map_clear_Pointer();
+            data.point = out_point;
+            var marker = me.m_man_make(data);
+            me.map.addOverlay(marker);
+            var pt = new BMap.Point(data.point.lng, data.point.lat);
+            me.map.setViewport([pt]);
+          }
+          // 室内
+          else if (data.key == 1) {
+            // 提高室内图的层级
+            $(&#39;#inside&#39;).css(&#39;zIndex&#39;, &#39;1001&#39;);
+            data.point = in_point;
+            $(&#39;#in_img&#39;).attr(&#39;src&#39;, data.src);
+
+            $(&#39;#in_img&#39;).unbind().on(&#39;load&#39;, function() {
+
+              $(&#39;#in_table_contain&#39;).hide();
+              $(&#39;#in_trail_map&#39;).show();
+              me.in_out_trail_make(data);
+            })
+          }
+    }</code></pre>
+<ul>
+<li>退出追踪，因进入追踪模式是从室外监控进入的，所以退出时，为室外监控。清除个人追踪的定时器。</li>
+</ul>
+<p><img src="./webapp/readme_img/006.png" alt="室外人的追踪"></p>
+<ul>
+<li>搜索模式：和点击一个人进入追踪模式相同。是特定搜索某个人的信息。</li>
+</ul>
+<p><img src="./webapp/readme_img/007.png" alt="室外人的追踪"></p>
+<ul>
+<li>室内监控：点击室外楼宇信息下排的数据进入</li>
+>>>>>>> c4f6b881da65a1037b6a7492a3312c02a5a23ffd
 </ul>
 <p><img src="./webapp/readme_img/008.png" alt="室内的追踪"></p>
 <ul>
@@ -314,15 +431,22 @@ footer h3 {
 <li><p>点击多人图标弹出多人信息列表，列表信息为人名和当前状态。点击人的名字进入追踪模式</p>
 </li>
 </ul>
+<<<<<<< HEAD
 <p><img src="./webapp/readme_img/010.png" alt="室内的数据"> </p>
 <p><img src="./webapp/readme_img/011.png" alt="室内的数据"> </p>
 <h3 id="0.3">3.思路</h3>
+=======
+<p><img src="./webapp/readme_img/010.png" alt="室内的数据"> 
+<img src="./webapp/readme_img/011.png" alt="室内的数据"> </p>
+<h2 id="3">3.思路</h2>
+>>>>>>> c4f6b881da65a1037b6a7492a3312c02a5a23ffd
 <ul>
 <li>第一次实现室内地图切换，在追踪模式室内外地图切换的地方折腾了会，开始的思路有错误，但值得先按先前的思维写代码。</li>
 <li>先前的想法：就是室外写室外的追踪，室内写室内的追踪。两个定时器，互不干扰。渲染数据的逻辑也不一样。</li>
 <li>需求：就是追踪数据有可能在室内，也有可能是室外的，思路：点击一个marker，先拿到追踪数据，判断该数据为室内外？！，分别进行不同的渲染，共用一个定时器。</li>
 <li>同一层地图不同显示级别的切换：默认进行100%那个设置的加载图片，加载完毕进行比例适应：</li>
 </ul>
+<<<<<<< HEAD
 <pre><code>  var img_bl = $(&#39;#in_img&#39;).height() / $(&#39;#in_img&#39;).width();
   var win_bl = $(&#39;#inside&#39;).height() / $(&#39;#inside&#39;).width();
   console.log(img_bl, win_bl);
@@ -361,6 +485,46 @@ footer h3 {
 </article>
 <footer>
 <h3 id="0.5">开源协议</h3>
+=======
+<pre><code>var img_bl = $(&#39;#in_img&#39;).height() / $(&#39;#in_img&#39;).width();
+var win_bl = $(&#39;#inside&#39;).height() / $(&#39;#inside&#39;).width();
+console.log(img_bl, win_bl);
+if (img_bl &lt; win_bl) {
+  $(&#39;#in_img&#39;).css(&#39;width&#39;, $(&#39;#in_img_contain&#39;).width() + &#39;px&#39;);
+  $(&#39;#in_img_contain&#39;).css(&#39;height&#39;, $(&#39;#in_img&#39;).height() + &#39;px&#39;);
+} else {
+  // $(&#39;#div&#39;).css(&#39;height&#39;, &#39;100%&#39;);
+  $(&#39;#in_img&#39;).css(&#39;height&#39;, $(&#39;#in_img_contain&#39;).height() + &#39;px&#39;);
+  $(&#39;#in_img_contain&#39;).css(&#39;width&#39;, $(&#39;#in_img&#39;).width() + &#39;px&#39;);
+}</code></pre>
+<ul>
+<li>切换其他级别的图，因为比例适应完成，所有直接根据点击的级别按钮的id值，进行设置宽高</li>
+</ul>
+<pre><code>            var id = $(&#39;#in_max_min .active&#39;).attr(&#39;id&#39;);
+            if (id == &#39;mm_50&#39;) {
+              // $(&#39;#in_img_contain&#39;).css({&#39;width&#39;:&#39;50%&#39;,&#39;height&#39;:&#39;50%&#39;});
+              $(&#39;#in_img_contain&#39;).width(&#39;50%&#39;);
+              $(&#39;#in_img_contain&#39;).height(&#39;50%&#39;);
+
+            } else if (id == &#39;mm_100&#39;) {
+              // $(&#39;#in_img_contain&#39;).css({&#39;width&#39;:&#39;100%&#39;,&#39;height&#39;:&#39;100%&#39;});
+              $(&#39;#in_img_contain&#39;).width(&#39;100%&#39;);
+              $(&#39;#in_img_contain&#39;).height(&#39;100%&#39;);
+            } else if (id == &#39;mm_200&#39;) {
+              // $(&#39;#in_img_contain&#39;).css({&#39;width&#39;:&#39;200%&#39;,&#39;height&#39;:&#39;200%&#39;});
+              $(&#39;#in_img_contain&#39;).width(&#39;200%&#39;);
+              $(&#39;#in_img_contain&#39;).height(&#39;200%&#39;);
+            }
+            $(&#39;#in_img&#39;).css({ &#39;width&#39;: &quot;100%&quot;, &#39;height&#39;: &quot;100%&quot; });</code></pre>
+<ul>
+<li>特别注意：室内定时器的渲染和室内地图的级别的选择变换丝毫没有影响！！！定时器的渲染数据属于业务逻辑范畴，定时器每次拿到数据，根据父级的显示进行室内点的渲染，而层级的选择就是属于样式的改变了，不属于业务逻辑上的，只是进行样式的改变，不需要进行打断定时器，重启定时器。</li>
+</ul>
+<h2 id="4">4.MIT</h2>
+
+</article>
+<footer>
+<h3 id="4.1">开源协议</h3>
+>>>>>>> c4f6b881da65a1037b6a7492a3312c02a5a23ffd
 <p>本程序基于MIT协议开源。</p>
 <pre><code>Copyright (c) cc.</code></pre>
 
