@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <!-- layer -->
+  <link rel="stylesheet" href="../../scripts/lib/layer/skin/layer.css" />
+  <!-- index -->
+  <link rel="stylesheet" href="./index.css" />
+</head>
+
+<body>
+  <div class="app">
+    <div class="map" id="map"></div>
+    <!--  -->
+    <div class="img" id="img">
+      <!-- 导航 -->
+      <div class="list">
+        <div class="list_box" id="nav">
+          <!-- <div class="item">floor_1</div>
+          <div class="item"></div>
+          <div class="item"></div> -->
+        </div>
+        <div class="btn" id="hall_out">退出</div>
+      </div>
+      <!-- 图片盒子 -->
+      <div class="box">
+        <div class="img_box" id="user_box">
+          <img src="./img/1_1.jpg" id="img_box">
+          
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <div class="user_img" id="user_img">
+      <!-- 图片盒子 -->
+      <div class="box">
+        <div class="img_box" id="one_user_box">
+          <img src="./img/1_1.jpg" id="one_img_box">
+          
+        </div>
+      </div>
+    </div>
+    <div class="user_out" id="user_out">退出追踪</div>
+  </div>
+  <!-- jq -->
+  <script type="text/javascript" src="../../scripts/lib/jquery/jquery.js"></script>
+  <!-- commom-->
+  <script type="text/javascript" src="../../scripts/common/common.js"></script>
+  <!-- conf -->
+  <script type="text/javascript" src="../../scripts/common/conf.js"></script>
+  <!-- layer-->
+  <script type="text/javascript" src='../../scripts/lib/layer/layer.js'></script>
+  <!-- BDmap-->
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=lS2AIbYR7EboAP238v2vkNY3"></script>
+  <!-- test -->
+  <script type="text/javascript" src='./test.js'></script>
+  <!-- index -->
+  <script type="text/javascript" src='./index.js'></script>
+  <!--  -->
+  <script type="text/javascript">
+  $(function() {
+    new App().init();
+  });
+  </script>
+</body>
+
+</html>
