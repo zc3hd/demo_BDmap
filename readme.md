@@ -13,3 +13,7 @@
 * 3.优化：其实真正做到后台模拟聚合，就应该给后台传递层级参数，返回相应的数据，不应该是点击，最后反而更难了。给后台传递参数的做法可以参考：
 * [ol.armincc.com/显示策略：demo](http://ol.armincc.com/modules/nav/index.html)
 * [ol.armincc.com/显示策略：源码](https://github.com/zc3hd/demo_Openlayers/tree/master/src_webapp/modules/demo_007_bigData)
+
+### 3.围栏操作
+
+* 基本业务都在源码里，demo只是渲染数据和点击编辑；
