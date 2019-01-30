@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>4层数据</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <div class="app">
+    <div class="map" id="map"></div>
+    <div class="btn" id="out">返回上一层</div>
+  </div>
+  <!-- JQ -->
+  <script type="text/javascript" src="../../scripts/lib/jquery/jquery.js"></script>
+  <!--bd-->
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6VArBpbbbMjBVP22TflHkpSq"></script>
+  <!-- test -->
+  <script type="text/javascript" src="./test.js"></script>
+  <!-- index -->
+  <script type="text/javascript" src="./index.js"></script>
+  <script>
+  $(function() {
+    new FN().init();
+  });
+  </script>
+</body>
+
+</html>
