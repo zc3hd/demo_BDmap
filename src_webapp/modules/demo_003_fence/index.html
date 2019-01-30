@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>fence</title>
+  <!-- 弹出层-->
+  <link rel="stylesheet" href="../../scripts/lib/layer/skin/layer.css" />
+  <!-- 绘画工具 -->
+  <link href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <!-- 室外地图 -->
+  <div class="app">
+    <div class="map" id="map"></div>
+    <div class="info" id="info"></div>
+    
+  </div>
+  <!-- jq-->
+  <script src="../../scripts/lib/jquery/jquery.js" type="text/javascript" language="javascript"></script>
+  <!-- bd-map-->
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6VArBpbbbMjBVP22TflHkpSq"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+  <!-- layer -->
+  <script type="text/javascript" src='../../scripts/lib/layer/layer.js'></script>
+  <!-- test -->
+  <script type="text/javascript" src='./test.js'></script>
+  <!-- index-->
+  <script type="text/javascript" src='./index.js'></script>
+  <script>
+  $(function() {
+    new FN({
+      point: {
+        "lng": 116.338452,
+        "lat": 40.006517,
+      }
+    }).init();
+  });
+  </script>
+</body>
+
+</html>
