@@ -57,7 +57,7 @@ App.prototype = {
     // 楼内监控
     me._hall();
 
-    // 
+    // 个人监控
     me._man();
 
   },
@@ -106,7 +106,7 @@ App.prototype = {
 
         // **********************************************模拟数据
         all_data.forEach(function(ele, index) {
-
+          // console.log(ele);
           // ren 
           if (ele.key == 0) {
             // 室内外
@@ -199,7 +199,9 @@ App.prototype = {
         // ******************************************************
 
 
+
         // 不是追踪模式
+        // 进行全局的代码的渲染，追踪模式，不进行数据清除和渲染；
         if (!me.all_obj.man.mode) {
           // 清除
           me.all_obj.all.arr.length = 0;
@@ -226,7 +228,7 @@ App.prototype = {
           else if (ele.key == 0 && ele.pos_key == "out") {
             me._man_marker(ele);
           }
-          
+
           // 收集所有的点
           me.all_obj.all.arr.push(pt);
         });
@@ -277,11 +279,11 @@ App.prototype = {
       // 点击人
       _man_ev: function(ele) {
 
-        // 记录用户ID
+        // 记录用户ID 用于循环过程中的数据寻找
         me.all_obj.man.user_id = ele.id;
-
         // 追踪模式开启
         me.all_obj.man.mode = true;
+
 
         // 当前数据包执行一次
         me._man_ev_once(ele);
@@ -505,6 +507,8 @@ App.prototype = {
         });
         marker.setLabel(label);
       },
+
+
       // 楼内事件
       _hall_ev: function(ele) {
         // 图层显示
